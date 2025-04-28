@@ -2,7 +2,3 @@
 *.data-00000-of-00001 filter=lfs diff=lfs merge=lfs -text
 checkpoint filter=lfs diff=lfs merge=lfs -text
 events.out.tfevents.* filter=lfs diff=lfs merge=lfs -text
-
-local_output/checkpoints/
-local_output/logs/train/
-local_output/logs/validation/
