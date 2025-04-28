@@ -68,13 +68,12 @@ def evaluate(args):
     print(f"Arguments: {args}")
 
     # Create output directory for images and debug images
-    debug_dir = None # Initialize debug_dir
     if args.output_dir:
         print(f"[*] Creating output directory for images at: {args.output_dir}")
         tf.io.gfile.makedirs(args.output_dir)
-        debug_dir = os.path.join(args.output_dir, "debug_intermediates")
-        tf.io.gfile.makedirs(debug_dir)
-        print(f"[*] Debug images will be saved to: {debug_dir}")
+        #debug_dir = os.path.join(args.output_dir, "debug_intermediates")
+        #tf.io.gfile.makedirs(debug_dir)
+        #print(f"[*] Debug images will be saved to: {debug_dir}")
     else:
         print("Warning: --output-dir not specified. Comparison and debug images will not be saved.")
 
@@ -249,8 +248,8 @@ def evaluate(args):
         print(f"  Average CIEDE2000: {avg_ciede2000:.4f}")
     if args.output_dir:
         print(f"[*] Sample comparison images saved to: {args.output_dir}")
-        if debug_dir:
-             print(f"[*] Debug intermediate images saved to: {debug_dir}")
+        # if debug_dir:
+        #      print(f"[*] Debug intermediate images saved to: {debug_dir}")
     print("------------------------------------")
 
 if __name__ == '__main__':
