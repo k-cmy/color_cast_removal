@@ -6,7 +6,7 @@ WORKDIR /app
 
 # --- Install dependencies ---
 # Copy only requirements first to leverage Docker cache
-COPY color_cast_removal_trainer/requirements.txt requirements.txt
+COPY color_cast_removal_trainer-2/requirements.txt requirements.txt
 # Install system dependencies for OpenCV if needed (less common with headless)
 # RUN apt-get update && apt-get install -y --no-install-recommends libgl1-mesa-glx && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir --upgrade pip
@@ -14,9 +14,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # --- Copy Application Code ---
 # Copy the trainer package (needed for model definition and utils)
-COPY color_cast_removal_trainer/trainer ./trainer
+COPY color_cast_removal_trainer-2/trainer ./trainer
 # Copy the inference script
-COPY predict.py ./predict.py
+# COPY predict.py ./predict.py
 # Copy utility script if needed separately (though it's better inside trainer)
 # COPY color_cast_removal_trainer/utils.py ./utils.py
 
@@ -24,7 +24,7 @@ COPY predict.py ./predict.py
 # Assuming your trained model ('final_model/model.keras') is available
 # Copy it into the image. Adjust the source path as needed.
 # Example: If model is saved in 'output/final_model/model.keras' relative to Dockerfile context
-COPY output/final_model/model.keras ./model.keras
+COPY local_output/final_model/model.keras ./model.keras
 # Or, if you prefer mounting the model at runtime:
 # ENV MODEL_PATH=/app/model.keras
 
@@ -35,5 +35,5 @@ COPY output/final_model/model.keras ./model.keras
 # EXPOSE 8080
 # CMD ["python", "server.py"] # Assuming you create a server.py
 
-ENTRYPOINT ["python", "predict.py"]
+# ENTRYPOINT ["python", "predict.py"]
 CMD ["--help"] # Default command if none provided
