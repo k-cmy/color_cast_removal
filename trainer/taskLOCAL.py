@@ -1,4 +1,5 @@
-# trainer/task.py
+# trainer/taskLOCAL.py 
+# for testing locally in the VScode environment.
 import argparse
 import os
 import time
