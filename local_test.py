@@ -31,8 +31,8 @@ if __name__ == '__main__':
     args.epochs = 30                 # Run only 1 epoch for a quick test
     args.batch_size = 2              # Use a small batch size
     args.learning_rate = 0.0001
-    args.decomnet_layers = 5
-    args.lr_decay_factor = 0.95      # <--- ADD THIS LINE (Match default in task.py)
+    args.decomnet_layers = 6
+    args.lr_decay_factor = 0.98      # <--- ADD THIS LINE (Match default in task.py)
 
     # --- Logging/Saving Arguments ---
     args.log_steps = 1               # Log every step for detailed view
