@@ -9,7 +9,7 @@ project_root = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, project_root)
 # ---------------------------------------------------------
 
-from trainer.task import train_and_evaluate # Import your main function
+from trainer.taskLOCAL import train_and_evaluate # Import your main function
 
 if __name__ == '__main__':
     # --- Define Arguments Similar to Docker/Vertex AI ---
@@ -28,10 +28,10 @@ if __name__ == '__main__':
     args.log_dir = None # Let task.py handle log dir creation inside job_dir
 
     # --- Training Hyperparameters (Use smaller values for quick tests) ---
-    args.epochs = 30                 # Run only 1 epoch for a quick test
+    args.epochs = 20                 # Run only 1 epoch for a quick test
     args.batch_size = 2              # Use a small batch size
     args.learning_rate = 0.0001
-    args.decomnet_layers = 6
+    args.decomnet_layers = 7
     args.lr_decay_factor = 0.98      # <--- ADD THIS LINE (Match default in task.py)
 
     # --- Logging/Saving Arguments ---
