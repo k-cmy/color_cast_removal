@@ -119,9 +119,9 @@ class ColorCastRemoval(tf.keras.Model):
         chroma_offset = self.offset_conv(x)     # Must be used in corrected_chroma
         corrected_chroma = input_chroma - (chroma_offset * strength_mask)  # Critical path
         # Inside model.py call method, after calculating offset/strength
-        tf.print("Strength Mask Stats:", tf.reduce_min(strength_mask), tf.reduce_max(strength_mask), tf.reduce_mean(strength_mask))
-        tf.print("Chroma Offset Stats:", tf.reduce_min(chroma_offset), tf.reduce_max(chroma_offset), tf.reduce_mean(chroma_offset))
-        # Or use tf.summary.histogram in training if preferred
+        # tf.print("Strength Mask Stats:", tf.reduce_min(strength_mask), tf.reduce_max(strength_mask), tf.reduce_mean(strength_mask))
+        # tf.print("Chroma Offset Stats:", tf.reduce_min(chroma_offset), tf.reduce_max(chroma_offset), tf.reduce_mean(chroma_offset))
+        # # Or use tf.summary.histogram in training if preferred
 
         # Illumination estimation
         illumination_map = self.illumination_conv_layer(x)
