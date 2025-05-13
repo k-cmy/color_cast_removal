@@ -9,7 +9,7 @@ project_root = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, project_root)
 # ---------------------------------------------------------
 
-from trainer.taskLOCAL import train_and_evaluate # Import your main function
+from trainer.task import train_and_evaluate # Import your main function
 
 if __name__ == '__main__':
     # --- Define Arguments Similar to Docker/Vertex AI ---

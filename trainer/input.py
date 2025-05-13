@@ -43,7 +43,36 @@ def parse_image_pair(low_path, high_path, is_training=False):
         if is_training:
             low_img_final_rgb = tf.image.random_brightness(low_img_final_rgb, max_delta=0.1)
             low_img_final_rgb = tf.image.random_contrast(low_img_final_rgb, lower=0.9, upper=1.1)
+
+            # --- NEW AUGMENTATIONS ---
+            # Color Jitter (Hue and Saturation)
+            low_img_final_rgb = tf.image.random_hue(low_img_final_rgb, max_delta=0.08) # Experiment with max_delta
+            low_img_final_rgb = tf.image.random_saturation(low_img_final_rgb, lower=0.7, upper=1.3) # Experiment with range
+
+            # Simulate Low Clarity/Sharpness (Blur)
+            if tf.random.uniform(()) < 0.3: # Apply blur randomly to 30% of images
+                ksize = tf.random.uniform((), minval=1, maxval=3, dtype=tf.int32) * 2 + 1 # Random odd kernel size (e.g., 3, 5)
+                # A simple average blur for demonstration. GaussianBlur would be better.
+                # For GaussianBlur, you'd need to implement it or use tf.contrib.image if available/compatible
+                # or use a library like tfa.image.gaussian_filter2d if you add TensorFlow Addons
+                # For now, a conceptual placeholder:
+                # low_img_final_rgb = apply_random_blur(low_img_final_rgb, max_kernel_size=5)
+
+            # Simulate Haziness (Simplified)
+            if tf.random.uniform(()) < 0.2: # Apply haze randomly to 20% of images
+                haze_color = tf.random.uniform(shape=[3], minval=0.5, maxval=0.9) # Light-ish color
+                haze_intensity = tf.random.uniform((), minval=0.2, maxval=0.6)
+                low_img_final_rgb = low_img_final_rgb * (1.0 - haze_intensity) + haze_color * haze_intensity
+
+            # Simulate Gamma Correction (for contrast)
+            if tf.random.uniform(()) < 0.25:
+                gamma = tf.random.uniform((), minval=0.7, maxval=1.5)
+                low_img_final_rgb = tf.pow(low_img_final_rgb, gamma)
+
+            # --- END NEW AUGMENTATIONS ---
+
             low_img_final_rgb = tf.clip_by_value(low_img_final_rgb, 0.0, 1.0)
+            
 
         # --- 6. Convert FINAL RGB to Normalized LAB ---
         # Expand dimensions for the wrapper function
